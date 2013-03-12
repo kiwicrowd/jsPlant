@@ -1,425 +1,452 @@
 <html>
-<head>
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-  <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 	</head>
-<body>
-<button id ="gogo"></button>
+	<body>
+		<button id ="gogo"></button>
 
-<table>
-<tr><td>Time</td></tr>
-<tr><td><div id="time">0</div></td></tr>
-</table>
+		<table>
+			<tr>
+				<td>Time</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="time">
+					0
+				</div></td>
+			</tr>
+		</table>
 
-<br/><br/>
+		<br/>
+		<br/>
 
-<table>
-<tr><td>Water</td></tr>
-<tr><td><div id="water">0</div></td></tr>
-<tr><td style="width:100px;"><div id="waterSlider"></div></td></tr>
-</table>
+		<table>
+			<tr>
+				<td>Water</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="water">
+					0
+				</div></td>
+			</tr>
+			<tr>
+				<td style="width:100px;"><div id="waterSlider"></div></td>
+			</tr>
+		</table>
 
-<br/><br/>
+		<br/>
+		<br/>
 
-<table>
-<tr><td>Sun</td></tr>
-<tr><td><div id="sun">0</div></td></tr>
-<tr><td style="width:100px;"><div id="sunSlider"></div></td></tr>
-</table>
+		<table>
+			<tr>
+				<td>Sun</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="sun">
+					0
+				</div></td>
+			</tr>
+			<tr>
+				<td style="width:100px;"><div id="sunSlider"></div></td>
+			</tr>
+		</table>
 
-<br/><br/>
+		<br/>
+		<br/>
 
-<table>
-<tr><td>Sunlight Rays</td></tr>
-<tr><td><div id="sunlight"></div></td></tr>
-</table>
+		<table>
+			<tr>
+				<td>Sunlight Rays</td>
+			</tr>
+			<tr>
+				<td><div id="sunlight"></div></td>
+			</tr>
+		</table>
 
-<br/><br/>
+		<br/>
+		<br/>
 
-<table>
-<tr><td>Pot Water</td></tr>
-<tr><td><div id="potWater">0</div></td></tr>
-</table>
+		<table>
+			<tr>
+				<td>Pot Water</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="potWater">
+					0
+				</div></td>
+			</tr>
+		</table>
 
-<br/><br/>
+		<br/>
+		<br/>
 
-<table>
-<tr><td>Progress Growth</td></tr>
-<tr><td><div id="growth">10</div></td></tr>
-</table>
+		<table>
+			<tr>
+				<td>Progress Growth</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="growth">
+					10
+				</div></td>
+			</tr>
+		</table>
 
-<button id="shop">Shop</button>
+		<button id="shop">
+			Shop
+		</button>
 
+		<div id="calc1"></div>
 
-<div id="calc1"></div>
+		<div id="calc2"></div>
 
-<div id="calc2"></div>
+		<div id="calc3"></div>
 
+		<table>
+			<tr>
+				<td>Soil Quality</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="soil">
+					100
+				</div></td>
+			</tr>
+		</table>
 
-<div id="calc3"></div>
+		<div id="dialog" title="Basic dialog">
+			<p>
+				Welcome to the Organic Plant Shop
+				<br/>
+				<a href="1">Buy seeds</a>
+				<br/>
+				Buy organic fertiliser
+				<br/>
+			</p>
+		</div>
 
-<table>
-<tr><td>Soil Quality</td></tr>
-<tr><td><div id="soil">100</div></td></tr>
-</table>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				//---------------------------------------------
 
+				$("#dialog").dialog({
+					autoOpen : false,
+					modal : true,
 
- 
-<div id="dialog" title="Basic dialog">
-  <p>Welcome to the Organic Plant Shop<br/>
-  <a href="1">Buy seeds</a><br/>Buy organic fertiliser<br/></p>
-</div>
- 
+					show : {
+						effect : "fade",
+						duration : 800
+					},
+					hide : {
+						effect : "fade",
+						duration : 600
+					},
+					buttons : {
+						Ok : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
 
+				$("#shop").click(function() {
+					$("#dialog").dialog("open");
+				});
 
-<script type="text/javascript">
-$(document).ready(function() {
-//---------------------------------------------
-	
-	$( "#dialog" ).dialog({
-		autoOpen: false,
-		modal: true,
-      
-		show: {
-		effect: "fade",
-		duration: 800
-		},
-		hide: {
-		effect: "fade",
-		duration: 600
-		},
-		buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
+				$("#wup").click(function() {
+					existing = $("#water").text();
+
+					if (existing.match(/^\d+$/)) {
+						$("#water").text(Number(existing) + 1);
+					} else {
+						alert("isn't a numner");
+					}
+				});
+				//---------------------------------------------
+				$("#wdown").click(function() {
+					existing = $("#water").text();
+
+					if (existing.match(/^\d+$/)) {
+						$("#water").text(Number(existing) - 1);
+					} else {
+						alert("isn't a number");
+					}
+				});
+				//---------------------------------------------
+				$("#gogo").click(function() {
+
+					timeGo();
+
+				})
+			});
+
+			function progress() {
+				water = $("#water").text();
+				sun = $("#sun").text();
+				soil = $("#soil").text();
+
+				growthDown = 0;
+
+				potWater = $("#potWater").text();
+				//waterDrink = 1.75;
+
+				waterGrowth = 0;
+				sunGrowth = 0;
+
+				//----------------------------------------
+
+				//----------------------------------------
+				switch(Number(water)) {
+					case 0:
+						waterGrowth = 0;
+						break;
+					case 1:
+						waterGrowth = 1;
+						break;
+					case 2:
+						waterGrowth = 2;
+						break;
+					case 3:
+						waterGrowth = 3;
+						break;
+					case 4:
+						waterGrowth = 4;
+						break;
+					case 5:
+						waterGrowth = 5;
+						break;
+
+					default:
+						alert("what is water: " + water);
+				}
+				//----------------------------------------
+
+				//----------------------------------------
+				switch(Number(sun)) {
+					case 0:
+						sunGrowth = 0;
+						break;
+					case 1:
+						sunGrowth = 1;
+						break;
+					case 2:
+						sunGrowth = 2;
+						break;
+					case 3:
+						sunGrowth = 3;
+						break;
+					case 4:
+						sunGrowth = 4;
+						break;
+					case 5:
+						sunGrowth = 5;
+						break;
+
+					default:
+						alert("what is sun: " + sun);
+				}
+				//----------------------------------------
+
+				/*
+				 cell = plantsize (25)
+				 each cell needs 1water + 2sunlight to grow.
+				 if it gets then each cell increase +1
+
+				 so 3 sun + 2 water=
+				 3 * 0.5 = needed water = 1.5;
+				 waterPot = water - 1.5;
+				 plantgrowth = 3/2 = 1.5 / 25
+				 */
+
+				growth = $("#growth").text();
+
+				sq = Number(soil);
+
+				//SOIL QUALITY DECREASES - EVERY 1.0 CELL GROWTH = GROWTH (EG.100) / 100 (%)
+
+				x = Number(sun) * 0.5;
+				v = Number(potWater) - x;
+				g = Number(sun) / 2 / Number(growth);
+
+				//sq = sq - (g / 100 );
+				//g = g - sq;
+
+				$("#calc2").html(g);
+				currently = $("#time").text();
+
+				avge = growth / currently;
+
+				$("#calc1").html("x = " + sun + " * 0.5 == " + x + "<br/>v = " + potWater + " - x == " + v + "<br/>g = " + sun + " / 2 / " + growth + " - ( " + sq + " - " + (g.toFixed(2) / 100) + "  ) == " + g + "<br/>avg: " + avge.toFixed(2));
+
+				//waterDrunk = Number(water) - (Number(sun) * 0.5 * Number(growth)); //Number(water);
+
+				//g = (Number(growth) / 100) + (waterDrunk / 100);
+
+				$("#growth").text(Number(growth) + g);
+
+				$("#potWater").text(Number(water) + v);
+
+				//$("#calc1").html("waterDrunk = " + water + " - (" + sun + " x 0.5 x " +growth+" == " + waterDrunk+"<br/>g=("+growth+"/100) + " + waterDrunk + "/100) == " + g);
+
+				//----------------------------------------
+
+				//m = Number(potWater) + Number(water) - waterDrunk;
+
+				//x = (Number(growth*waterDrunk/100));
+				//g = (Number(growth) + x - growthDown).toFixed(2);
+
+				/*
+				 if(Number(m) >= 0)
+				 {
+				 $("#potWater").text(m);
+				 }
+				 else
+				 {
+				 $("#potWater").text("0");
+				 g = growth-1;
+				 }
+
+				 if (g < -2)
+				 {
+				 alert("dead plant!!");
+				 exit;
+				 }
+
+				 */
+
+				return true;
 			}
-		}
-	});
- 
- 
- 
- 
-    $( "#shop" ).click(function() {
-      $( "#dialog" ).dialog( "open" );
-    });
-  
-	$("#wup").click(function(){
-		existing = $("#water").text();
-		
-		if(existing.match(/^\d+$/)) {
-			$("#water").text(Number(existing)+1);
-		}
-		else
-		{
-			alert("isn't a numner");
-		}
-	});	
-//---------------------------------------------
-	$("#wdown").click(function(){
-		existing = $("#water").text();
-		
-		if(existing.match(/^\d+$/)) {
-			$("#water").text(Number(existing)-1);
-		}
-		else
-		{
-			alert("isn't a number");
-		}
-	});
-//---------------------------------------------
-	$("#gogo").click(function(){
-	
-	timeGo();
-	
-	})
-	
-});
 
-function progress()
-{
-	water 	= $("#water").text();
-	sun 	= $("#sun").text();
-	soil 	= $("#soil").text();
-	
-	growthDown = 0;
-	
-	potWater = $("#potWater").text();
-	//waterDrink = 1.75;
+			function timeGo() {
+				currently = $("#time").text();
 
-	waterGrowth = 0;
-	sunGrowth = 0;
-	
-//----------------------------------------	
-	
-//----------------------------------------	
-	switch(Number(water))
-	{
-		case 0:
-			waterGrowth = 0;
-			break;		
-		case 1:
-			waterGrowth = 1;
-			break;
-		case 2:
-			waterGrowth = 2;
-			break;
-		case 3:
-			waterGrowth = 3;
-			break;
-		case 4:
-			waterGrowth = 4;
-			break;
-		case 5:
-			waterGrowth = 5;
-			break;
-			
-		default:
-			alert("what is water: " + water);
-	}
-//----------------------------------------
+				$("#time").text(Number(currently) + 1);
 
-	
-//----------------------------------------	
-	switch(Number(sun))
-	{
-		case 0:
-			sunGrowth = 0;
-			break;
-		case 1:
-			sunGrowth = 1;
-			break;
-		case 2:
-			sunGrowth = 2;
-			break;
-		case 3:
-			sunGrowth = 3;
-			break;
-		case 4:
-			sunGrowth = 4;
-			break;
-		case 5:
-			sunGrowth = 5;
-			break;
-			
-		default:
-			alert("what is sun: " + sun);
-	}
-//----------------------------------------
+				progress();
 
-/*
-cell = plantsize (25)
-each cell needs 1water + 2sunlight to grow.
-if it gets then each cell increase +1
+				setTimeout(timeGo, 1000);
+			}
+		</script>
 
-so 3 sun + 2 water=
-3 * 0.5 = needed water = 1.5;
-waterPot = water - 1.5;
-plantgrowth = 3/2 = 1.5 / 25
-*/
+		<script>
+			$(function() {
+				$("#waterSlider").slider({
+					range : "min",
+					value : 2,
+					min : 0,
+					max : 5,
+					slide : function(event, ui) {
+						$("#water").text(ui.value);
+					}
+				});
+				//$( "#water" ).text( $( "#sunSlider" ).slider( "value" ) );
 
+				$("#sunSlider").slider({
+					range : "min",
+					value : 4,
+					min : 0,
+					max : 5,
+					slide : function(event, ui) {
+						$("#sun").text(ui.value);
+					}
+				});
 
-growth = $("#growth").text();
+			});
+		</script>
+		<script type='text/javascript'>
+			google.load('visualization', '1', {
+				packages : ['gauge']
+			});
+			google.setOnLoadCallback(drawChart);
+			function drawChart() {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Label');
+				data.addColumn('number', 'Value');
+				data.addRows(3);
+				data.setValue(0, 0, 'Growth');
+				data.setValue(0, 1, 0);
+				data.setValue(1, 0, 'Sun');
+				data.setValue(1, 1, 0);
+				data.setValue(2, 0, 'Water');
+				data.setValue(2, 1, 0);
 
-sq = Number(soil);
+				var options = {
+					width : 400,
+					height : 120,
+					redFrom : 90,
+					redTo : 100,
+					yellowFrom : 75,
+					yellowTo : 90,
+					minorTicks : 1
+				};
 
-//SOIL QUALITY DECREASES - EVERY 1.0 CELL GROWTH = GROWTH (EG.100) / 100 (%) 
+				var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+				chart.draw(data, options);
 
+				var data2 = new google.visualization.DataTable();
+				data2.addColumn('string', 'Label');
+				data2.addColumn('number', 'Value');
+				data2.addRows(3);
+				data2.setValue(0, 0, 'Pot');
+				data2.setValue(0, 1, 0);
+				data2.setValue(1, 0, 'Burst');
+				data2.setValue(1, 1, 0);
+				/*
+				 data2.setValue(2, 0, 'VV');
+				 data2.setValue(2, 1, 0);
+				 */
+				var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+				chart2.draw(data2, options);
 
-x = Number(sun) * 0.5;
-v = Number(potWater) - x;
-g = Number(sun) / 2 / Number(growth);
+				setInterval(function() {
+					data.setValue(2, 1, (100 / 5 * Number($("#water").text())));
+					data.setValue(1, 1, (100 / 5 * Number($("#sun").text())));
+					data.setValue(0, 1, (Number($("#growth").text())));
 
-//sq = sq - (g / 100 );
-//g = g - sq;
+					data2.setValue(0, 1, (100 / 10 * Number($("#potWater").text())));
+					data2.setValue(1, 1, (100 / 0.5 * Number($("#calc2").text()).toFixed(2)));
 
-$("#calc2").html(g);
-currently = $("#time").text();
+					chart.draw(data, options);
+					chart2.draw(data2, options);
 
-avge = growth/ currently;
+				}, 1000);
 
-$("#calc1").html("x = " + sun + " * 0.5 == " +x+"<br/>v = " + potWater + " - x == " + v + "<br/>g = " + sun + " / 2 / " + growth + " - ( "+ sq + " - " + (g.toFixed(2) / 100) +"  ) == " + g + "<br/>avg: " + avge.toFixed(2));
+			}
 
-	
-	//waterDrunk = Number(water) - (Number(sun) * 0.5 * Number(growth)); //Number(water);
+			/*
+			 setInterval(function() {
+			 var options = {
+			 width: 400, height: 120,
+			 redFrom: 90, redTo: 100,
+			 yellowFrom:75, yellowTo: 90,
+			 minorTicks: 1
+			 };
 
-	//g = (Number(growth) / 100) + (waterDrunk / 100);
+			 var data = new google.visualization.DataTable();
+			 data.addColumn('string', 'Label');
+			 data.addColumn('number', 'Value');
+			 data.addRows(3);
+			 data.setValue(0, 0, 'Growth');
+			 data.setValue(1, 0, 'Sun');
+			 data.setValue(2, 0, 'Water');
+			 data.setValue(2, 1, (100/5 * Number($("#water").text())));
+			 data.setValue(1, 1, (100/5 * Number($("#sun").text())));
+			 data.setValue(0, 1, (Number($("#growth").text())));
+			 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 
-	$("#growth").text(Number(growth) + g);
+			 chart.draw(data, options);
+			 },1000);
+			 */
 
-	$("#potWater").text(Number(water) + v);
-	
-	
-	//$("#calc1").html("waterDrunk = " + water + " - (" + sun + " x 0.5 x " +growth+" == " + waterDrunk+"<br/>g=("+growth+"/100) + " + waterDrunk + "/100) == " + g);
-	
-//----------------------------------------
-	
-	//m = Number(potWater) + Number(water) - waterDrunk;
-	
-	
-	
-	//x = (Number(growth*waterDrunk/100));
-	//g = (Number(growth) + x - growthDown).toFixed(2);
-	
-	/*
-	if(Number(m) >= 0)
-	{
-		$("#potWater").text(m);
-	}
-	else
-	{
-		$("#potWater").text("0");
-		g = growth-1;
-	}
-	
-	if (g < -2)
-	{
-		alert("dead plant!!");
-		exit;
-	}
-		
-	*/
-	
-	
-	return true;
-}
+		</script>
 
-function timeGo()
-{
-	currently = $("#time").text();
-		
-	$("#time").text(Number(currently)+1);
-		
-	progress();
-		
-    setTimeout(timeGo, 1000);
-}
-</script>
+		<div id='chart_div'></div>
+		<div id='chart_div2'></div>
 
-<script>
-  $(function() {
-    $( "#waterSlider" ).slider({
-      range: "min",
-      value: 2,
-      min: 0,
-      max: 5,
-      slide: function( event, ui ) {
-        $( "#water" ).text( ui.value );
-      }
-    });
-    //$( "#water" ).text( $( "#sunSlider" ).slider( "value" ) );
-	
-	$( "#sunSlider" ).slider({
-      range: "min",
-      value: 4,
-      min: 0,
-      max: 5,
-      slide: function( event, ui ) {
-        $( "#sun" ).text( ui.value );
-      }
-    });
-	
-  });
-</script>
-    <script type='text/javascript'>
-       
-	  google.load('visualization', '1', {packages:['gauge']});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Label');
-		data.addColumn('number', 'Value');
-		data.addRows(3);
-		data.setValue(0, 0, 'Growth');
-		data.setValue(0, 1, 0);
-		data.setValue(1, 0, 'Sun');
-		data.setValue(1, 1, 0);
-		data.setValue(2, 0, 'Water');
-		data.setValue(2, 1, 0);
-			
-        var options = {
-          width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 1
-        };
-
-		
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-        chart.draw(data, options);
-	
-	  
-		var data2 = new google.visualization.DataTable();
-		data2.addColumn('string', 'Label');
-		data2.addColumn('number', 'Value');
-		data2.addRows(3);
-		data2.setValue(0, 0, 'Pot');
-		data2.setValue(0, 1, 0);
-		data2.setValue(1, 0, 'Burst');
-		data2.setValue(1, 1, 0);
-		/*
-		data2.setValue(2, 0, 'VV');
-		data2.setValue(2, 1, 0);
-		*/
-		var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-        chart2.draw(data2, options);
-		  
-	
-		setInterval(function() {
-			data.setValue(2, 1, (100/5 * Number($("#water").text())));
-			data.setValue(1, 1, (100/5 * Number($("#sun").text())));
-			data.setValue(0, 1, (Number($("#growth").text())));
-			
-			data2.setValue(0, 1, (100/10 * Number($("#potWater").text())));
-			data2.setValue(1, 1, (100/0.5 * Number($("#calc2").text()).toFixed(2)));
-			
-			
-			chart.draw(data, options);
-			chart2.draw(data2, options);
-			
-		}, 1000);   
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  }
-
-/*
-	setInterval(function() {
-		var options = {
-          width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 1
-        };
-
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Label');
-		data.addColumn('number', 'Value');
-		data.addRows(3);
-		data.setValue(0, 0, 'Growth');
-		data.setValue(1, 0, 'Sun');
-		data.setValue(2, 0, 'Water');
-		data.setValue(2, 1, (100/5 * Number($("#water").text())));
-		data.setValue(1, 1, (100/5 * Number($("#sun").text())));
-		data.setValue(0, 1, (Number($("#growth").text())));
-var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-        
-		chart.draw(data, options);
-	},1000);
-*/	  
-	  
-	  
-    </script>
-  
-    <div id='chart_div'></div>
-	<div id='chart_div2'></div>
-	
-</body>
+	</body>
 </html>
